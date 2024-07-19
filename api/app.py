@@ -246,20 +246,15 @@ def read_gcode_file(file_path):
 
 def parse_nc_gcode(lines, start_line, end_line):
     coordinates = []
-    current_position = {'X': 0, 'Y': 0}
-
-    for line in lines[start_line-1:end_line]:
-        if line.startswith(('G0', 'G1')):
+    for line in lines[start_line - 1: end_line]:
+        if line.startswith('G1') or line.startswith('G0'):
             x_match = re.search(r'X([\-0-9.]+)', line)
             y_match = re.search(r'Y([\-0-9.]+)', line)
 
-            if x_match:
-                current_position['X'] = float(x_match.group(1))
-            if y_match:
-                current_position['Y'] = float(y_match.group(1))
-
-            coordinates.append((0, current_position['X'], current_position['Y'], None, None))
-
+            if x_match and y_match:
+                x = float(x_match.group(1))
+                y = float(y_match.group(1))
+                coordinates.append((x, y))
     return coordinates
 
 def parse_ngc_gcode(lines, start_line, end_line):
@@ -373,14 +368,14 @@ def plot_gcode_path(coordinates):
     for i in range(1, len(coordinates)):
         p1 = coordinates[i - 1]
         p2 = coordinates[i]
-        
-        if p2[G] in [0, 1]:
-            # Linear move
-            ax.plot([p1[X], p2[X]], [p1[Y], p2[Y]], 'b-')
-        elif p2[G] in [2, 3]:
+
+        if p2[G] in [2, 3]:
             # Arc move
             center = (p1[X] + p2[I], p1[Y] + p2[J])
             plot_arc(ax, p1, p2, center, p2[G])
+        else:
+            # Linear move
+            ax.plot([p1[0], p2[0]], [p1[1], p2[1]], 'b-')
 
     plt.xlabel('X')
     plt.ylabel('Y')
