@@ -8,7 +8,7 @@ document.getElementById('upload-form').addEventListener('submit', async function
     formData.append('end_line', document.getElementById('end-line').value);
     
     try {
-        const response = await fetch('/upload', {
+        const response = await fetch('/api/upload', {
             method: 'POST',
             body: formData
         });
@@ -30,7 +30,7 @@ document.getElementById('upload-form').addEventListener('submit', async function
         document.getElementById('distance').classList.add('bold-text'); // Add a class for styling
         
         // Request plot from the server
-        const plotResponse = await fetch('/plot', {
+        const plotResponse = await fetch('/api/plot', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

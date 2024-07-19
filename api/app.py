@@ -391,7 +391,7 @@ def plot_gcode_path(coordinates):
     buf.seek(0)
     return buf
 
-@app.route('/upload', methods=['POST'])
+@app.route('/api/upload', methods=['POST'])
 def upload_file():
     if 'file' not in request.files:
         return jsonify({'error': 'No file part'}), 400
@@ -424,7 +424,7 @@ def upload_file():
         
         return jsonify(data)
 
-@app.route('/plot', methods=['POST'])
+@app.route('/api/plot', methods=['POST'])
 def plot():
     data = request.json
     coordinates = data['coordinates']
