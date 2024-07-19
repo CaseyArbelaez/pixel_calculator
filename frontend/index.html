@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G-code Distance Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background">
+        <div id="calculator-container">
+            <div id="calculator">
+                <h1>G-code Distance Calculator</h1>
+                <p>Instructions: Please select a G-code file (.nc or .ngc), enter the start and end lines, then click "Upload File and Calculate Distance".</p>
+                <form id="upload-form">
+                    <label for="file-input">Select G-code File:</label>
+                    <input type="file" id="file-input" name="file" accept=".nc,.ngc" required>
+                    <br>
+                    <label for="start-line">Start Line:</label>
+                    <input type="number" id="start-line" name="start_line" required>
+                    <br>
+                    <label for="end-line">End Line:</label>
+                    <input type="number" id="end-line" name="end_line" required>
+                    <br>
+                    <button class="submit-button" type="submit">Upload File and Calculate Distance</button>
+                </form>
+                <div id="result" style="display: none;">
+                    <p id="distance"></p>
+                    <div id="plot">
+                        <img id="plot-img" src="" alt="G-code Path" style="display: none;">
+                    </div>
+                </div>
+                <button class="clear-button" id="clear-button">Clear Inputs and Graph</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
