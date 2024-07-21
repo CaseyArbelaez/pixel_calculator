@@ -22,13 +22,23 @@
                     <label for="end-line">End Line:</label>
                     <input type="number" id="end-line" name="end_line" required>
                     <br>
+                    <label for="unit">Select Unit:</label>
+                    <select id="unit" name="unit" required>
+                        <option value="mm">Millimeters</option>
+                        <option value="in">Inches</option>
+                        <option value="ft">Feet</option>
+                        <option value="m">Meters</option>
+                        <option value="cm">Centimeters</option>
+                    </select>
                     <button class="submit-button" type="submit">Upload File and Calculate Distance</button>
+                    <p id="end-of-file"></p>
                 </form>
                 <div id="result" style="display: none;">
                     <p id="distance"></p>
                     <div id="plot">
                         <img id="plot-img" src="" alt="G-code Path" style="display: none;">
                     </div>
+                    <p id="dimensions"></p>
                 </div>
                 <button class="clear-button" id="clear-button">Clear Inputs and Graph</button>
             </div>
